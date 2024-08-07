@@ -1,57 +1,55 @@
 # Kirim Pesan WhatsApp
 
-Buat fungsi untuk menangani format nomor telpon
+Dokumentasi ini menjelaskan cara membuat fungsi untuk menangani format nomor telepon, mengatur link WhatsApp, dan membuat trigger untuk mengirim pesan melalui WhatsApp.
+
+## Fungsi Format Nomor Telepon
+
+Fungsi berikut digunakan untuk menangani berbagai format penulisan nomor telepon dan mengonversinya ke format internasional (+62 untuk Indonesia).
 
 ```php
-function hp($string)
-{
-    $string = str_replace(" ", "", $string);
-    // kadang ada penulisan no hp 0811 239 345
-    $string = str_replace("(", "", $string);
-    // kadang ada penulisan no hp (0274) 778787
-    $string = str_replace(")", "", $string);
-    // kadang ada penulisan no hp (0274) 778787
-    $string = str_replace(".", "", $string);
-    // kadang ada penulisan no hp 0811.239.345
+function hp($string) {
+    // Menghapus spasi, tanda kurung, dan titik dari nomor telepon
+    $string = str_replace([" ", "(", ")", "."], "", $string);
 
-    if (!preg_match('/[^+0-9]/', trim($string)))
-    // cek apakah no hp mengandung karakter + dan 0-9
-    {
-        if (substr(trim($string), 0, 3) == '+62')
-        // cek apakah no hp karakter 1-3 adalah +62
-        {
+    // Memeriksa apakah nomor telepon hanya mengandung karakter yang valid (+ dan 0-9)
+    if (!preg_match('/[^+0-9]/', trim($string))) {
+        if (substr(trim($string), 0, 3) == '+62') {
+            // Jika nomor telepon sudah dalam format internasional (+62)
             $string = trim($string);
-        } elseif (substr(trim($string), 0, 1) == '0')
-        // cek apakah no hp karakter 1 adalah 0
-        {
+        } elseif (substr(trim($string), 0, 1) == '0') {
+            // Jika nomor telepon dimulai dengan '0', ganti dengan '+62'
             $string = '+62' . substr(trim($string), 1);
         }
-        // fungsi trim() untuk menghilangan
-        // spasi yang ada didepan/belakang
     } else {
-        $string = 'Format no hp yang dimasukkan tidak lengkap atau salah!';
+        // Jika nomor telepon tidak valid
+        $string = 'Format nomor telepon yang dimasukkan tidak lengkap atau salah!';
     }
 
     return $string;
 }
 ```
 
-Setting link whatsapp
+## Mengatur Link WhatsApp
+
+Kode berikut digunakan untuk membuat link WhatsApp berdasarkan nomor telepon yang telah diformat dan pesan yang akan dikirim.
 
 ```php
 $nohp = hp($guest['telp']);
 $message = '&text=' . urlencode('Halo! layanan anda sedang kami proses');
+
+// Menentukan link WhatsApp berdasarkan jenis perangkat (mobile atau desktop)
 $linkwa = $this->agent->is_mobile()
-? 'https://api.whatsapp.com/send?phone=' . $nohp . $message
-: 'whatsapp://send?phone=' . $nohp . $message;
+    ? 'https://api.whatsapp.com/send?phone=' . $nohp . $message
+    : 'whatsapp://send?phone=' . $nohp . $message;
 ```
 
-Buat trigger
+## Membuat Trigger
 
-```html
-<a class="btn btn-success btn-sm rounded" href="<?= $linkwa ?>" hidden
-  >ChatWA</a
->
+Gunakan kode HTML berikut untuk membuat tombol yang dapat mengirim pesan melalui WhatsApp ketika diklik.
+
+```php
+<a href="<?= $linkwa ?>">ChatWA</a>
 ```
 
-شكرًا --rye
+<br><br>
+syukron --rye

@@ -1,12 +1,18 @@
-# Export Data Menjadi Excel - Codeigniter 3
+# Export Data Menjadi Excel - CodeIgniter 3
 
-Install phpoffice/phpspreadsheet
+Dokumentasi ini menjelaskan langkah-langkah untuk mengekspor data menjadi file Excel menggunakan CodeIgniter 3 dan PhpSpreadsheet.
 
-```php
+## Instalasi PhpSpreadsheet
+
+Instal library `phpoffice/phpspreadsheet` menggunakan Composer:
+
+```sh
 composer require phpoffice/phpspreadsheet
 ```
 
-Letakan diatas controller
+## Konfigurasi Controller
+
+Tambahkan kode berikut di bagian atas file controller Anda untuk mengimpor kelas yang diperlukan dari PhpSpreadsheet:
 
 ```php
 require 'vendor/autoload.php';
@@ -15,23 +21,26 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 ```
 
-Buat fungsi export
+### Membuat Fungsi Export
+
+Buat fungsi export di controller Anda untuk mengekspor data ke file Excel:
 
 ```php
 public function export(){
     $this->load->helper('download');
 
+    // Mengambil data dari model
     $data = $this->M_guest->get_guests();
 
     if (empty($data)) {
-    echo "Tidak ada data untuk diekspor";
-    exit;
+        echo "Tidak ada data untuk diekspor";
+        exit;
     }
 
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
-    // Header kolom - sesuaikan dengan data yang diperlukan
+    // Menambahkan header kolom
     $sheet->setCellValue('A1', 'Nama');
     $sheet->setCellValue('B1', 'Telepon');
     $sheet->setCellValue('C1', 'Keperluan');
@@ -39,24 +48,27 @@ public function export(){
     $sheet->setCellValue('E1', 'Status');
     $sheet->setCellValue('F1', 'Instansi/Eksternal');
 
-    // Data - sesuaikan dengan data yang diperlukan
+    // Menambahkan data ke dalam sheet
     $row = 2;
     foreach ($data as $row_data) {
-    $sheet->setCellValue('A' . $row, $row_data['nama']);
-    $sheet->setCellValue('B' . $row, $row_data['telp']);
-    $sheet->setCellValue('C' . $row, $row_data['keperluan']);
-    $sheet->setCellValue('D' . $row, $row_data['created_at']);
-    $sheet->setCellValue('E' . $row, $row_data['status']);
-    $sheet->setCellValue('F' . $row, $row_data['instansi'] ? $row_data['instansi'] : 'Tidak ada');
-    $row++;
+        $sheet->setCellValue('A' . $row, $row_data['nama']);
+        $sheet->setCellValue('B' . $row, $row_data['telp']);
+        $sheet->setCellValue('C' . $row, $row_data['keperluan']);
+        $sheet->setCellValue('D' . $row, $row_data['created_at']);
+        $sheet->setCellValue('E' . $row, $row_data['status']);
+        $sheet->setCellValue('F' . $row, $row_data['instansi'] ? $row_data['instansi'] : 'Tidak ada');
+        $row++;
     }
 
+    // Menyimpan file Excel
     $writer = new Xlsx($spreadsheet);
     $filename = 'data_export.xlsx';
     $writer->save($filename);
 
+    // Memaksa unduhan file
     force_download($filename, NULL);
 }
 ```
 
-شكرًا --rye
+<br><br>
+syukron --rye
