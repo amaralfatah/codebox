@@ -4,7 +4,7 @@ Dokumentasi ini menjelaskan cara membuat fungsi untuk menangani format nomor tel
 
 ## Steps
 
-1. Fungsi untuk menangani berbagai format penulisan nomor telepon dan mengonversinya ke format internasional (+62 untuk Indonesia):
+1. Fungsi untuk menangani berbagai format penulisan nomor telepon dan mengonversinya ke format internasional (+62 untuk Indonesia)
     ```php
     function hp($string) {
         // Menghapus spasi, tanda kurung, dan titik dari nomor telepon
@@ -28,7 +28,7 @@ Dokumentasi ini menjelaskan cara membuat fungsi untuk menangani format nomor tel
     }
     ```
 
-2. Mengatur Link WhatsApp:
+2. Mengatur Link WhatsApp
     ```php
     $nohp = hp($guest['telp']);
     $message = '&text=' . urlencode('Halo! layanan anda sedang kami proses');
