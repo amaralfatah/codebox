@@ -5,10 +5,13 @@ Dokumentasi ini menjelaskan langkah-langkah untuk mengekspor data menjadi file E
 ## Steps
 
 1. Instal library `phpoffice/phpspreadsheet` menggunakan Composer:
+    ```sh
+    composer require phpoffice/phpspreadsheet
+    ```
+3. Konfigurasi Controller:
+4. Membuat Fungsi Export
 
-```sh
-composer require phpoffice/phpspreadsheet
-```
+
 
 2. Konfigurasi Controller:
 
