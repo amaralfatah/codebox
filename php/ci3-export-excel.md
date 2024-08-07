@@ -2,17 +2,15 @@
 
 Dokumentasi ini menjelaskan langkah-langkah untuk mengekspor data menjadi file Excel menggunakan CodeIgniter 3 dan PhpSpreadsheet.
 
-## Instalasi PhpSpreadsheet
+## Steps
 
-Instal library `phpoffice/phpspreadsheet` menggunakan Composer:
+1. Instal library `phpoffice/phpspreadsheet` menggunakan Composer:
 
 ```sh
 composer require phpoffice/phpspreadsheet
 ```
 
-## Konfigurasi Controller
-
-Tambahkan kode berikut di bagian atas file controller Anda untuk mengimpor kelas yang diperlukan dari PhpSpreadsheet:
+2. Konfigurasi Controller:
 
 ```php
 require 'vendor/autoload.php';
@@ -21,9 +19,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 ```
 
-### Membuat Fungsi Export
-
-Buat fungsi export di controller Anda untuk mengekspor data ke file Excel:
+3. Membuat Fungsi Export
 
 ```php
 public function export(){
