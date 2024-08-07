@@ -1,12 +1,12 @@
 # Export Data Menjadi Excel - Codeigniter 3
 
-install phpoffice/phpspreadsheet
+Install phpoffice/phpspreadsheet
 
 ```php
 composer require phpoffice/phpspreadsheet
 ```
 
-letakan diatas controller
+Letakan diatas controller
 
 ```php
 require 'vendor/autoload.php';
@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 ```
 
-buat fungsi export
+Buat fungsi export
 
 ```php
 public function export(){
