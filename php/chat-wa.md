@@ -1,6 +1,6 @@
 # Kirim Pesan WhatsApp
 
-buat fungsi untuk menangani format nomor telpon
+Buat fungsi untuk menangani format nomor telpon
 
 ```php
 function hp($string)
@@ -36,7 +36,7 @@ function hp($string)
 }
 ```
 
-setting link whatsapp
+Setting link whatsapp
 
 ```php
 $nohp = hp($guest['telp']);
@@ -46,10 +46,12 @@ $linkwa = $this->agent->is_mobile()
 : 'whatsapp://send?phone=' . $nohp . $message;
 ```
 
-buat trigger
+Buat trigger
 
 ```html
 <a class="btn btn-success btn-sm rounded" href="<?= $linkwa ?>" hidden
   >ChatWA</a
 >
 ```
+
+شكرًا --rye
