@@ -44,15 +44,15 @@ Berikut adalah struktur HTML untuk tabel dan tombol ekspor:
             <!-- Baris lainnya -->
         </tbody>
     </table>
-    <button id="btnExcel">Export to Excel</button>
+    <button id="btnExcel" class="btn btn-success btn-sm" onclick="exportToExcel('table1', 'penimbangan_anak.xlsx')">Excel</button>
 
     <script>
-        document.getElementById('btnExcel').addEventListener('click', function() {
+        function exportToExcel(tableId, fileName) {
             var wb = XLSX.utils.book_new();
-            var ws = XLSX.utils.table_to_sheet(document.getElementById('table1'));
-            XLSX.utils.book_append_sheet(wb, ws, 'Data Penimbangan');
-            XLSX.writeFile(wb, 'penimbangan_anak.xlsx');
-        });
+            var ws = XLSX.utils.table_to_sheet(document.getElementById(tableId));
+            XLSX.utils.book_append_sheet(wb, ws, 'Data');
+            XLSX.writeFile(wb, fileName);
+        }
     </script>
 </body>
 </html>
