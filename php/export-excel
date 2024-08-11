@@ -1,8 +1,4 @@
-# Tutorial: Mengekspor Tabel HTML ke PDF dan Excel
-
-Tutorial ini menjelaskan cara mengekspor tabel HTML ke format PDF dan Excel menggunakan JavaScript dengan bantuan dua library: `jsPDF` untuk PDF dan `SheetJS` (XLSX) untuk Excel.
-
-## 1. Mengekspor Tabel HTML ke Excel
+# Mengekspor Tabel HTML ke Excel
 
 ### Langkah 1: Sertakan Library `SheetJS`
 
