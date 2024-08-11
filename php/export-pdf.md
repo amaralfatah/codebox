@@ -45,14 +45,20 @@ Tambahkan tombol dan tabel HTML yang sama dengan yang kita gunakan untuk Excel:
             <!-- Baris lainnya -->
         </tbody>
     </table>
-    <button id="btnPdf">Export to PDF</button>
+    <button id="btnPdf" class="btn btn-danger btn-sm" onclick="exportToPdf('table1', 'penimbangan_anak.pdf')">PDF</button>
 
     <script>
-        document.getElementById('btnPdf').addEventListener('click', function() {
+        function exportToPdf(tableId, fileName) {
             const { jsPDF } = window.jspdf;
             var doc = new jsPDF();
-            var table = document.getElementById('table1');
+            var table = document.getElementById(tableId);
             var rows = [];
+            var header = [];
+            
+            // Extract table header
+            for (var i = 0; i < table.rows[0].cells.length; i++) {
+                header.push(table.rows[0].cells[i].innerText);
+            }
             
             // Extract table data
             for (var i = 1; i < table.rows.length; i++) { // start at 1 to skip header row
@@ -65,7 +71,7 @@ Tambahkan tombol dan tabel HTML yang sama dengan yang kita gunakan untuk Excel:
 
             // Add table to PDF
             doc.autoTable({
-                head: [['Nama Anak', 'Tanggal Penimbangan', 'Penimbangan Bulan Lalu', 'Penimbangan Sekarang', 'Tinggi Badan', 'Status Penimbangan', 'Aksi']],
+                head: [header],
                 body: rows,
                 theme: 'grid',
                 styles: {
@@ -76,8 +82,8 @@ Tambahkan tombol dan tabel HTML yang sama dengan yang kita gunakan untuk Excel:
                 }
             });
 
-            doc.save('penimbangan_anak.pdf');
-        });
+            doc.save(fileName);
+        }
     </script>
 </body>
 </html>
