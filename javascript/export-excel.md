@@ -10,7 +10,7 @@ Tambahkan skrip `SheetJS` ke HTML Anda:
 ### Langkah 2: Buat Tombol dan Tabel HTML
 
 Berikut adalah struktur HTML untuk tabel dan tombol ekspor:
-```html
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
